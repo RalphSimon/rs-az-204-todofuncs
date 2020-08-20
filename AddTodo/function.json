@@ -1,0 +1,28 @@
+{
+	"bindings": [
+		{
+			"authLevel": "admin",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["post"],
+			"route": "todos/{userId}"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
+		{
+			"type": "cosmosDB",
+			"direction": "out",
+			"name": "newTodo",
+			"databaseName": "kibo-data",
+			"collectionName": "todos",
+			"createIfNotExists": "false",
+			"connectionStringSetting": "kibodatabase_DOCUMENTDB",
+			"partitionKey": "userId"
+		}
+	],
+	"scriptFile": "../dist/AddTodo/index.js"
+}

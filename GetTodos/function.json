@@ -1,0 +1,28 @@
+{
+	"bindings": [
+		{
+			"authLevel": "function",
+			"type": "httpTrigger",
+			"direction": "in",
+			"name": "req",
+			"methods": ["get"],
+			"route": "todos/{userId}"
+		},
+		{
+			"type": "http",
+			"direction": "out",
+			"name": "res"
+		},
+		{
+			"type": "cosmosDB",
+			"direction": "in",
+			"name": "allTodosByUser",
+			"databaseName": "kibo-data",
+			"collectionName": "todos",
+			"connectionStringSetting": "kibodatabase_DOCUMENTDB",
+			"partitionKey": "{userId}",
+			"sqlQuery": "SELECT * FROM c WHERE c.userId = {userId}"
+		}
+	],
+	"scriptFile": "../dist/GetTodos/index.js"
+}
